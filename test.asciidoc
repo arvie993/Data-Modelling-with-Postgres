@@ -1,0 +1,183 @@
+
+
++*In[1]:*+
+[source, ipython3]
+----
+%load_ext sql
+----
+
+
++*In[2]:*+
+[source, ipython3]
+----
+%sql postgresql://student:student@127.0.0.1/sparkifydb
+----
+
+
++*Out[2]:*+
+----'Connected: student@sparkifydb'----
+
+
++*In[3]:*+
+[source, ipython3]
+----
+%sql SELECT * FROM songplays LIMIT 5;
+----
+
+
++*Out[3]:*+
+----
+ * postgresql://student:***@127.0.0.1/sparkifydb
+5 rows affected.
+
+[cols=",,,,,,,,",options="header",]
+|=======================================================================
+|songplay_id |start_time |user_id |level |song_id |artist_id |session_id
+|location |user_agent
+|0 |1543537327796 |91 |free |None |None |829 |Dallas-Fort
+Worth-Arlington, TX |Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;
+WOW64; Trident/6.0)
+
+|1 |1543540121796 |73 |paid |None |None |1049 |Tampa-St.
+Petersburg-Clearwater, FL |"Mozilla/5.0 (Macintosh; Intel Mac OS X
+10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6
+Safari/537.78.2"
+
+|2 |1543540368796 |73 |paid |None |None |1049 |Tampa-St.
+Petersburg-Clearwater, FL |"Mozilla/5.0 (Macintosh; Intel Mac OS X
+10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6
+Safari/537.78.2"
+
+|3 |1543540625796 |73 |paid |None |None |1049 |Tampa-St.
+Petersburg-Clearwater, FL |"Mozilla/5.0 (Macintosh; Intel Mac OS X
+10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6
+Safari/537.78.2"
+
+|4 |1543540856796 |73 |paid |None |None |1049 |Tampa-St.
+Petersburg-Clearwater, FL |"Mozilla/5.0 (Macintosh; Intel Mac OS X
+10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6
+Safari/537.78.2"
+|=======================================================================
+----
+
+
++*In[4]:*+
+[source, ipython3]
+----
+%sql SELECT * FROM users LIMIT 5;
+----
+
+
++*Out[4]:*+
+----
+ * postgresql://student:***@127.0.0.1/sparkifydb
+5 rows affected.
+
+[cols=",,,,",options="header",]
+|=============================================
+|user_id |first_name |last_name |gender |level
+|91 |Jayden |Bell |M |free
+|73 |Jacob |Klein |M |paid
+|73 |Jacob |Klein |M |paid
+|73 |Jacob |Klein |M |paid
+|73 |Jacob |Klein |M |paid
+|=============================================
+----
+
+
++*In[5]:*+
+[source, ipython3]
+----
+%sql SELECT * FROM songs LIMIT 5;
+----
+
+
++*Out[5]:*+
+----
+ * postgresql://student:***@127.0.0.1/sparkifydb
+5 rows affected.
+
+[cols=",,,,",options="header",]
+|=======================================================================
+|song_id |title |artist_id |year |duration
+|SOMZWCG12A8C13C480 |I Didn't Mean To |ARD7TVE1187B99BFB1 |0 |218.93179
+
+|SOMZWCG12A8C13C480 |I Didn't Mean To |ARD7TVE1187B99BFB1 |0 |218.93179
+
+|SOUDSGM12AC9618304 |Insatiable (Instrumental Version)
+|ARNTLGG11E2835DDB9 |0 |266.39628
+
+|SOIAZJW12AB01853F1 |Pink World |AR8ZCNI1187B9A069B |1984 |269.81832
+
+|SOHKNRJ12A6701D1F8 |Drop of Rain |AR10USD1187B99F3F1 |0 |189.57016
+|=======================================================================
+----
+
+
++*In[6]:*+
+[source, ipython3]
+----
+%sql SELECT * FROM artists LIMIT 5;
+----
+
+
++*Out[6]:*+
+----
+ * postgresql://student:***@127.0.0.1/sparkifydb
+5 rows affected.
+
+[cols=",,,,",options="header",]
+|=======================================================================
+|artist_id |name |location |latitude |longitude
+|ARD7TVE1187B99BFB1 |Casual |California - LA |nan |nan
+
+|ARD7TVE1187B99BFB1 |Casual |California - LA |nan |nan
+
+|ARNTLGG11E2835DDB9 |Clp | |nan |nan
+
+|AR8ZCNI1187B9A069B |Planet P Project | |nan |nan
+
+|AR10USD1187B99F3F1 |Tweeterfriendly Music |Burlington, Ontario, Canada
+|nan |nan
+|=======================================================================
+----
+
+
++*In[7]:*+
+[source, ipython3]
+----
+%sql SELECT * FROM time LIMIT 5;
+----
+
+
++*Out[7]:*+
+----
+ * postgresql://student:***@127.0.0.1/sparkifydb
+5 rows affected.
+
+[cols=",,,,,,",options="header",]
+|==================================================
+|start_time |hour |day |week |month |year |weekday
+|2018-11-30 00:22:07.796000 |0 |30 |48 |11 |2018 |4
+|2018-11-30 01:08:41.796000 |1 |30 |48 |11 |2018 |4
+|2018-11-30 01:12:48.796000 |1 |30 |48 |11 |2018 |4
+|2018-11-30 01:17:05.796000 |1 |30 |48 |11 |2018 |4
+|2018-11-30 01:20:56.796000 |1 |30 |48 |11 |2018 |4
+|==================================================
+----
+
+[[remember-restart-this-notebook-to-close-connection-to-sparkifydb]]
+== REMEMBER: Restart this notebook to close connection to `sparkifydb`
+
+Each time you run the cells above, remember to restart this notebook to
+close the connection to your database. Otherwise, you won't be able to
+run your code in `create_tables.py`, `etl.py`, or `etl.ipynb` files
+since you can't make multiple connections to the same database (in this
+case, sparkifydb).
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+
+----
